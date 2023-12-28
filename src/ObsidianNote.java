@@ -1,9 +1,14 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class ObsidianNote {
+    // this is the name of the directory where the generated markdown files will be outputted
+    static final String nameOutputDirectory = "markdownOutput";
+    // the separator separates individual parts of a path(e.g., directory/file, in this case '/' is the separator)
+    static final String directoryNamePlusSeparator = "markdownOutput" + File.separator;
     String fileName;
     String fileNameWithExtension;
     int fileLength; // number of lines in the markdown file
@@ -40,7 +45,7 @@ public class ObsidianNote {
 
     void generateNoteFile()
     {
-        try (FileWriter writer = new FileWriter(ObsidianLectureNotesFrameworkGenerator.directoryNamePlusSeparator + fileNameWithExtension); BufferedWriter bufferedWriter = new BufferedWriter(writer))
+        try (FileWriter writer = new FileWriter(directoryNamePlusSeparator + fileNameWithExtension); BufferedWriter bufferedWriter = new BufferedWriter(writer))
         {
             for(String string : noteContent)
             {

@@ -3,11 +3,6 @@ import java.util.*;
 
 public class ObsidianLectureNotesFrameworkGenerator {
 
-    // this is the name of the directory where the generated markdown files will be outputted
-    static final String nameOutputDirectory = "markdownOutput";
-    // the separator separates individual parts of a path(e.g., directory/file, in this case '/' is the separator)
-    static final String directoryNamePlusSeparator = "markdownOutput" + File.separator;
-
     // this hash map is used for returning the proper MainMenuOption enumeration based on user input
     static HashMap<String, MainMenuOption> mainMenuOptionsHashMap = new HashMap<>();
 
@@ -152,12 +147,12 @@ public class ObsidianLectureNotesFrameworkGenerator {
             if(mainMenuOption == MainMenuOption.GENERATE_FILES)
             {
                 instantiateLectureNotesFrameworkAndGenerateFiles();
-                System.out.println("Files successfully outputted in " + nameOutputDirectory);
+                System.out.println("Files successfully outputted in " + ObsidianNote.nameOutputDirectory);
             }
             else if(mainMenuOption == MainMenuOption.CLEAR_OUTPUT_DIRECTORY)
             {
                 deleteOutputDirectoryContents();
-                System.out.println(nameOutputDirectory + " directory cleared");
+                System.out.println(ObsidianNote.nameOutputDirectory + " directory cleared");
             }
             else if(mainMenuOption == MainMenuOption.EXIT)
             {
@@ -209,7 +204,7 @@ public class ObsidianLectureNotesFrameworkGenerator {
 
     private void deleteOutputDirectoryContents()
     {
-        deleteDirectoryContents(new File(nameOutputDirectory));
+        deleteDirectoryContents(new File(ObsidianNote.nameOutputDirectory));
     }
 
     public static void main(String[] args)
