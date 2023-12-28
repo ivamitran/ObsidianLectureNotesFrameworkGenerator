@@ -75,6 +75,7 @@ public class LectureSlideNote extends ObsidianNote {
                     break;
                 }
                 // the last two X's will not be replaced here, will be replaced when the set of lecture slide template notes are generated
+
             }
         }
         return specificNoteContent;
