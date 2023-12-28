@@ -26,7 +26,7 @@ public class RootNote extends ObsidianNote {
 
 
         // extract the names of the lecture slide note files directly, therefore the root note should be created after the lecture slide notes are created
-        for(LectureSlideTemplateNote lectureSlideTemplateNoteInst : lectureNotesFrameworkInst.arrayOfLectureSlideTemplateNotes)
+        for(LectureSlideNote lectureSlideTemplateNoteInst : lectureNotesFrameworkInst.arrayOfLectureSlideNotes)
         {
             String generalKeyValuePairEntry = generalKey + ": " + generalValue;
             String specificKeyValuePairEntry = generalKeyValuePairEntry.replaceFirst("X", Integer.toString(lectureSlideTemplateNoteInst.slideNumber));

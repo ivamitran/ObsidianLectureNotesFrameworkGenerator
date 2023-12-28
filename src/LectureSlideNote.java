@@ -1,7 +1,6 @@
-import java.io.File;
 import java.util.Arrays;
 
-public class LectureSlideTemplateNote extends ObsidianNote {
+public class LectureSlideNote extends ObsidianNote {
 
     // first X: slide number
     // second X: course name
@@ -39,7 +38,7 @@ public class LectureSlideTemplateNote extends ObsidianNote {
     String lectureSlidePDFName;
     String lectureSlidePDFNameWithExtension;
 
-    LectureSlideTemplateNote(String fileName, String courseName, int lectureNumber, int slideNumber, String lectureSlidePDFName, String[] noteContent)
+    LectureSlideNote(String fileName, String courseName, int lectureNumber, int slideNumber, String lectureSlidePDFName, String[] noteContent)
     {
         super(fileName, noteContent);
         this.courseName = courseName;

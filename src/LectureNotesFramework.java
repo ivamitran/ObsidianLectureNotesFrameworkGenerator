@@ -6,7 +6,7 @@ public class LectureNotesFramework {
     int totalNumSlides;
 
     // variables of which values will be synthesized from what the user supplies
-    LectureSlideTemplateNote[] arrayOfLectureSlideTemplateNotes;
+    LectureSlideNote[] arrayOfLectureSlideNotes;
     RootNote rootNote;
     ObsidianNote additionalNotesNote; // even though this note will be em
 
@@ -15,7 +15,7 @@ public class LectureNotesFramework {
         this.courseName = courseName;
         this.lectureNumber = lectureNumber;
         this.totalNumSlides = totalNumSlides;
-        arrayOfLectureSlideTemplateNotes = new LectureSlideTemplateNote[totalNumSlides];
+        arrayOfLectureSlideNotes = new LectureSlideNote[totalNumSlides];
 
         // at this point we are able to instantiate all the note objects since we have all the information we need
 
@@ -43,7 +43,7 @@ public class LectureNotesFramework {
         for(int i = 0; i < totalNumSlides; i++)
         {
             // Constructing the file name of the current note
-            String currentLectureSlideNoteFileName = LectureSlideTemplateNote.generalLectureSlideNoteFileName.replaceFirst("X", Integer.toString(lectureNumber)); // replace the first X with the lecture number
+            String currentLectureSlideNoteFileName = LectureSlideNote.generalLectureSlideNoteFileName.replaceFirst("X", Integer.toString(lectureNumber)); // replace the first X with the lecture number
             currentLectureSlideNoteFileName = currentLectureSlideNoteFileName.replaceFirst("X", Integer.toString(i + 1)); // replace the second X with the slide number
 
             // Constructing the file name of the current note's corresponding slide PDF
@@ -51,17 +51,17 @@ public class LectureNotesFramework {
             String currentLectureSlidePDFName = getCurrentLectureSlidePDFName(i);
 
             // Constructing specific content of the current note
-            String[] specificNoteContent = LectureSlideTemplateNote.returnSpecificNoteContent(i + 1, lectureNumber, courseName, currentLectureSlidePDFName);
+            String[] specificNoteContent = LectureSlideNote.returnSpecificNoteContent(i + 1, lectureNumber, courseName, currentLectureSlidePDFName);
 
             // Finally instantiating the note itself
-            arrayOfLectureSlideTemplateNotes[i] = new LectureSlideTemplateNote(currentLectureSlideNoteFileName, courseName, lectureNumber, i + 1, currentLectureSlidePDFName, specificNoteContent);
+            arrayOfLectureSlideNotes[i] = new LectureSlideNote(currentLectureSlideNoteFileName, courseName, lectureNumber, i + 1, currentLectureSlidePDFName, specificNoteContent);
         }
 
         this.addLinksToSpecificFileContentAfterInitialized();
     }
 
     private String getCurrentLectureSlidePDFName(int i) {
-        String currentLectureSlidePDFName = LectureSlideTemplateNote.generalLectureSlidePDFName.replaceFirst("X", Integer.toString(i + 1)); // replace the first X with slide number
+        String currentLectureSlidePDFName = LectureSlideNote.generalLectureSlidePDFName.replaceFirst("X", Integer.toString(i + 1)); // replace the first X with slide number
         currentLectureSlidePDFName = currentLectureSlidePDFName.replaceFirst("X", courseName); // replaceFirst the second X with the course name
         currentLectureSlidePDFName = currentLectureSlidePDFName.replaceFirst("X", Integer.toString(lectureNumber)); // replaceFirst the third X with lecture number
         return currentLectureSlidePDFName;
@@ -84,9 +84,9 @@ public class LectureNotesFramework {
      */
     void generateLectureSlideNoteMarkdownFiles()
     {
-        for(LectureSlideTemplateNote lectureSlideTemplateNoteInst : arrayOfLectureSlideTemplateNotes)
+        for(LectureSlideNote lectureSlideNoteInst : arrayOfLectureSlideNotes)
         {
-            lectureSlideTemplateNoteInst.generateNoteFile();
+            lectureSlideNoteInst.generateNoteFile();
         }
     }
 
@@ -114,14 +114,14 @@ public class LectureNotesFramework {
      */
     void addLinksToSpecificFileContentAfterInitialized()
     {
-        for(int i = 0; i < arrayOfLectureSlideTemplateNotes.length; i++)
+        for(int i = 0; i < arrayOfLectureSlideNotes.length; i++)
         {
-            LectureSlideTemplateNote currentLectureSlideTemplateNoteInst = arrayOfLectureSlideTemplateNotes[i];
+            LectureSlideNote currentLectureSlideNoteInst = arrayOfLectureSlideNotes[i];
             int count = 0;
-            for(int j = 0; j < currentLectureSlideTemplateNoteInst.noteContent.size(); j++) {
-                if (currentLectureSlideTemplateNoteInst.noteContent.get(j).contains("X")) {
+            for(int j = 0; j < currentLectureSlideNoteInst.noteContent.size(); j++) {
+                if (currentLectureSlideNoteInst.noteContent.get(j).contains("X")) {
 
-                    String currentXLine = currentLectureSlideTemplateNoteInst.noteContent.get(j);
+                    String currentXLine = currentLectureSlideNoteInst.noteContent.get(j);
                     String currentXLineUpdated;
 
                     count++;
@@ -130,25 +130,25 @@ public class LectureNotesFramework {
                         if(i == 0) // if on the lecture slide 1
                         {
                             currentXLineUpdated = currentXLine.replaceFirst("X", "null"); //
-                            currentLectureSlideTemplateNoteInst.noteContent.set(j, currentXLineUpdated);
+                            currentLectureSlideNoteInst.noteContent.set(j, currentXLineUpdated);
                         }
                         else
                         {
-                            currentXLineUpdated = currentXLine.replaceFirst("X", arrayOfLectureSlideTemplateNotes[i - 1].fileName);
-                            currentLectureSlideTemplateNoteInst.noteContent.set(j, currentXLineUpdated);
+                            currentXLineUpdated = currentXLine.replaceFirst("X", arrayOfLectureSlideNotes[i - 1].fileName);
+                            currentLectureSlideNoteInst.noteContent.set(j, currentXLineUpdated);
                         }
                     }
                     else if (count == 2)
                     {
-                        if(i == arrayOfLectureSlideTemplateNotes.length - 1) // if on the last lecture slide
+                        if(i == arrayOfLectureSlideNotes.length - 1) // if on the last lecture slide
                         {
                             currentXLineUpdated = currentXLine.replaceFirst("X", "null"); //
-                            currentLectureSlideTemplateNoteInst.noteContent.set(j, currentXLineUpdated);
+                            currentLectureSlideNoteInst.noteContent.set(j, currentXLineUpdated);
                         }
                         else
                         {
-                            currentXLineUpdated = currentXLine.replaceFirst("X", arrayOfLectureSlideTemplateNotes[i + 1].fileName);
-                            currentLectureSlideTemplateNoteInst.noteContent.set(j, currentXLineUpdated);
+                            currentXLineUpdated = currentXLine.replaceFirst("X", arrayOfLectureSlideNotes[i + 1].fileName);
+                            currentLectureSlideNoteInst.noteContent.set(j, currentXLineUpdated);
                         }
                     }
                 }
