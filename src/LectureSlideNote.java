@@ -6,7 +6,6 @@ public class LectureSlideNote extends ObsidianNote {
     // second X: course name
     // third X: lecture number
     static String generalLectureSlidePDFName = "X_XLectureX";
-    static String generalLectureSlidePDFPath = "X_XLectureX.pdf";
     // first X: lecture number
     // second X: slide number
     static String generalLectureSlideNoteFileName = "lectureXSlideX";
