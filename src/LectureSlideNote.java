@@ -54,20 +54,23 @@ public class LectureSlideNote extends ObsidianNote {
         // will replace the first 4 placeholders, the last two placeholders will be replaced by the set class
         String[] specificNoteContent = Arrays.copyOf(generalNoteContent, generalNoteContent.length);
 
-        int count = 0; // used to determine which X currently replacing to replaceFirst with the correct value
+        int count = 0; // used to determine which X currently replacing to replace with the correct value
         for (int i = 0; i < specificNoteContent.length; i++) {
             if (specificNoteContent[i].contains("X")) {
                 count++;
                 if (count == 1) // this X is for the slide number
                 {
                     specificNoteContent[i] = specificNoteContent[i].replaceFirst("X", "\"" + slideNumber + "\"");
-                } else if (count == 2) // this X is for lecture number
+                }
+                else if (count == 2) // this X is for lecture number
                 {
                     specificNoteContent[i] = specificNoteContent[i].replaceFirst("X", "\"" + lectureNumber + "\"");
-                } else if (count == 3) // this X is for course name
+                }
+                else if (count == 3) // this X is for course name
                 {
                     specificNoteContent[i] = specificNoteContent[i].replaceFirst("X", courseName);
-                } else if (count == 4) // this X is for the slide PDF file path
+                }
+                else if (count == 4) // this X is for the slide PDF file path
                 {
                     specificNoteContent[i] = specificNoteContent[i].replaceFirst("X", lectureSlidePDFNameWithExtension);
                     break;
